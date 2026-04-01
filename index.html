@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EXAM SEATS — Smart Seating Allocation</title>
-    <meta name="description" content="AI-powered examination seating arrangement system for universities">
+    <title>EXAM SEATS — Examination Seating System</title>
+    <meta name="description" content="Efficient examination seating arrangement system for universities">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -18,7 +18,7 @@
         <div class="overlay"></div>
         <div class="screen-content center-content">
             <h1 class="app-title landing-title">EXAM SEATS</h1>
-            <p class="app-subtitle">Smart AI-Powered Examination Seating System</p>
+            <p class="app-subtitle">Comprehensive Examination Seating System</p>
             <div class="card login-choice-card">
                 <h2>Welcome</h2>
                 <p class="card-desc">Select your role to continue</p>
@@ -257,20 +257,20 @@
                             <div class="step-actions">
                                 <button class="btn btn-outline" onclick="goToStep(2)">← Back</button>
                                 <button class="btn btn-gold btn-lg allocate-btn" id="btn-allocate"
-                                    onclick="runAllocation()">Allocate with AI</button>
+                                    onclick="runAllocation()">Allocate Seats</button>
                             </div>
                         </div>
                         <div id="allocate-loading" style="display:none;">
                             <div class="loader-wrap">
                                 <div class="loading-spinner"></div>
-                                <h2 class="loading-text">AI is allocating seats...</h2>
-                                <p class="loading-sub">Analyzing student data and optimizing room distribution</p>
+                                <h2 class="loading-text">Processing allocations...</h2>
+                                <p class="loading-sub">Mapping student data to optimal room distribution</p>
                             </div>
                         </div>
                         <div id="allocate-results" style="display:none;">
                             <div class="success-banner">
                                 <span class="success-icon"></span>
-                                <h2>AI Allocation Complete!</h2>
+                                <h2>Allocation Complete!</h2>
                                 <p id="allocation-summary-text"></p>
                             </div>
                             <h3>Room Summary</h3>

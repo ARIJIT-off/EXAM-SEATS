@@ -420,14 +420,14 @@ function updateAllocateSummary() {
 }
 
 /* ════════════════════════════════════════
-   13. AI ALLOCATION ALGORITHM
+   13. SEAT ALLOCATION ALGORITHM
    ════════════════════════════════════════ */
 function runAllocation() {
   document.getElementById('allocate-ready').style.display = 'none';
   document.getElementById('allocate-loading').style.display = 'block';
   document.getElementById('allocate-results').style.display = 'none';
 
-  // Simulate AI processing delay (1.8s)
+  // Simulate processing delay (1.8s)
   setTimeout(() => {
     const allocation = allocateSeats(state.students, state.selectedBuilding, state.selectedRooms);
     state.allocation = allocation.byEnrollment;
