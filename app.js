@@ -106,11 +106,11 @@ function handleFacultyLogin(e) {
   const errEl     = document.getElementById('faculty-error');
 
   if (!/^\d{6}$/.test(teacherId)) {
-    errEl.textContent = '⚠ Teacher ID must be exactly 6 digits.';
+    errEl.textContent = 'Teacher ID must be exactly 6 digits.';
     return;
   }
   if (!/^\d{4}$/.test(password)) {
-    errEl.textContent = '⚠ Password must be exactly 4 digits.';
+    errEl.textContent = 'Password must be exactly 4 digits.';
     return;
   }
 
@@ -133,24 +133,24 @@ function handleStudentLogin(e) {
   const errEl     = document.getElementById('student-error');
 
   if (!/^\d{14}$/.test(enrollId)) {
-    errEl.textContent = '⚠ Enrollment ID must be exactly 14 digits.';
+    errEl.textContent = 'Enrollment ID must be exactly 14 digits.';
     return;
   }
   if (!/^\d{4}$/.test(password)) {
-    errEl.textContent = '⚠ Password must be exactly 4 digits.';
+    errEl.textContent = 'Password must be exactly 4 digits.';
     return;
   }
 
   // Check if student exists in stored CSV data
   const stored = localStorage.getItem('examSeatsData');
   if (!stored) {
-    errEl.textContent = '⚠ Student not found. No data has been uploaded yet.';
+    errEl.textContent = 'Student not found. No data has been uploaded yet.';
     return;
   }
   const students = JSON.parse(stored);
   const found = students.find(s => String(s.EnrollmentID).trim() === enrollId);
   if (!found) {
-    errEl.textContent = '⚠ Student not found. Please check your Enrollment ID.';
+    errEl.textContent = 'Student not found. Please check your Enrollment ID.';
     return;
   }
 
@@ -213,9 +213,9 @@ function selectBuilding(key) {
 
   // Update step title
   document.getElementById('upload-title').textContent =
-    `📁 Upload Student Details — ${BUILDINGS[key].name}`;
+    `Upload Student Details — ${BUILDINGS[key].name}`;
   document.getElementById('room-selection-title').textContent =
-    `🚪 Select Rooms — ${BUILDINGS[key].name}`;
+    `Select Rooms — ${BUILDINGS[key].name}`;
 
   // Reset CSV preview
   document.getElementById('csv-preview').style.display = 'none';
@@ -611,7 +611,6 @@ function showStudentResult(enrollId) {
     screen.style.backgroundImage = `url('images/ss7.png')`;
     card.innerHTML = `
       <div class="result-not-found">
-        <div class="result-not-found-icon">⏳</div>
         <h3>Seat Not Yet Assigned</h3>
         <p>Your seat has not been allocated yet.<br>Please check back later or contact your faculty.</p>
       </div>`;

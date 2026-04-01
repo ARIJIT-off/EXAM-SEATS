@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EXAM SEATS — Smart Seating Allocation</title>
     <meta name="description" content="AI-powered examination seating arrangement system for universities">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <!-- ═══════════════ SCREEN: Landing Page ═══════════════ -->
@@ -20,11 +23,13 @@
                 <h2>Welcome</h2>
                 <p class="card-desc">Select your role to continue</p>
                 <div class="btn-group-vertical">
-                    <button class="btn btn-primary btn-lg" id="btn-student-login" onclick="showScreen('screen-student-login')">
-                        <span class="btn-icon">🎓</span> Student Login
+                    <button class="btn btn-primary btn-lg" id="btn-student-login"
+                        onclick="showScreen('screen-student-login')">
+                        Student Login
                     </button>
-                    <button class="btn btn-gold btn-lg" id="btn-faculty-login" onclick="showScreen('screen-faculty-login')">
-                        <span class="btn-icon">👨‍🏫</span> Faculty Login
+                    <button class="btn btn-gold btn-lg" id="btn-faculty-login"
+                        onclick="showScreen('screen-faculty-login')">
+                        Faculty Login
                     </button>
                 </div>
             </div>
@@ -42,18 +47,19 @@
         <div class="screen-content center-content">
             <div class="card login-card">
                 <div class="login-card-header">
-                    <span class="login-icon">👨‍🏫</span>
                     <h2>Faculty Login</h2>
                 </div>
                 <form id="faculty-login-form" onsubmit="handleFacultyLogin(event)">
                     <div class="form-group">
                         <label for="teacher-id">Teacher ID</label>
-                        <input type="text" id="teacher-id" placeholder="Enter 6-digit Teacher ID" maxlength="6" inputmode="numeric" required>
+                        <input type="text" id="teacher-id" placeholder="Enter 6-digit Teacher ID" maxlength="6"
+                            inputmode="numeric" required>
                         <span class="input-hint">Must be exactly 6 digits</span>
                     </div>
                     <div class="form-group">
                         <label for="faculty-password">Password</label>
-                        <input type="password" id="faculty-password" placeholder="Enter 4-digit Password" maxlength="4" inputmode="numeric" required>
+                        <input type="password" id="faculty-password" placeholder="Enter 4-digit Password" maxlength="4"
+                            inputmode="numeric" required>
                         <span class="input-hint">Must be exactly 4 digits</span>
                     </div>
                     <div class="error-msg" id="faculty-error"></div>
@@ -74,18 +80,19 @@
         <div class="screen-content center-content">
             <div class="card login-card">
                 <div class="login-card-header">
-                    <span class="login-icon">🎓</span>
                     <h2>Student Login</h2>
                 </div>
                 <form id="student-login-form" onsubmit="handleStudentLogin(event)">
                     <div class="form-group">
                         <label for="enrollment-id">Enrollment ID</label>
-                        <input type="text" id="enrollment-id" placeholder="Enter 14-digit Enrollment ID" maxlength="14" inputmode="numeric" required>
+                        <input type="text" id="enrollment-id" placeholder="Enter 14-digit Enrollment ID" maxlength="14"
+                            inputmode="numeric" required>
                         <span class="input-hint">Must be exactly 14 digits</span>
                     </div>
                     <div class="form-group">
                         <label for="student-password">Password</label>
-                        <input type="password" id="student-password" placeholder="Enter 4-digit Password" maxlength="4" inputmode="numeric" required>
+                        <input type="password" id="student-password" placeholder="Enter 4-digit Password" maxlength="4"
+                            inputmode="numeric" required>
                         <span class="input-hint">Must be exactly 4 digits</span>
                     </div>
                     <div class="error-msg" id="student-error"></div>
@@ -101,14 +108,14 @@
         <div class="screen-header">
             <div class="header-spacer"></div>
             <h1 class="header-title">EXAM SEATS</h1>
-            <button class="btn btn-logout" id="btn-logout-dashboard" onclick="logout()">Logout ⏏</button>
+            <button class="btn btn-logout" id="btn-logout-dashboard" onclick="logout()">Logout</button>
         </div>
         <div class="screen-content">
             <div class="dashboard-content">
                 <h2 class="section-title">Select Building for Seat Allocation</h2>
                 <div class="building-grid">
                     <div class="building-card" id="card-b1" onclick="selectBuilding('B1')">
-                        <div class="building-card-icon">🏢</div>
+
                         <h3>Allocate in B1 Building</h3>
                         <p>4 Floors · 31 Rooms</p>
                         <p class="capacity-text">Total Capacity: 1,100</p>
@@ -116,7 +123,7 @@
                         <span class="card-arrow">→</span>
                     </div>
                     <div class="building-card" id="card-b2" onclick="selectBuilding('B2')">
-                        <div class="building-card-icon">🏗️</div>
+
                         <h3>Allocate in B2 Building</h3>
                         <p>4 Floors · 40 Rooms</p>
                         <p class="capacity-text">Total Capacity: 1,200</p>
@@ -124,7 +131,7 @@
                         <span class="card-arrow">→</span>
                     </div>
                     <div class="building-card" id="card-b3" onclick="selectBuilding('B3')">
-                        <div class="building-card-icon">🏛️</div>
+
                         <h3>Allocate in B3 Building</h3>
                         <p>6 Floors · 54 Rooms</p>
                         <p class="capacity-text">Total Capacity: 1,890</p>
@@ -133,7 +140,7 @@
                     </div>
                 </div>
                 <div id="existing-data-notice" class="notice-card" style="display:none;">
-                    <h3>📋 Existing Allocation Data Found</h3>
+                    <h3>Existing Allocation Data Found</h3>
                     <p>You have previous allocation data saved. What would you like to do?</p>
                     <div class="btn-group">
                         <button class="btn btn-gold" onclick="viewAllAllocations()">View Existing Allocations</button>
@@ -150,37 +157,48 @@
         <div class="screen-header">
             <button class="btn btn-back" onclick="showScreen('screen-faculty-dashboard')">← Back</button>
             <h1 class="header-title">EXAM SEATS</h1>
-            <button class="btn btn-logout" onclick="logout()">Logout ⏏</button>
+            <button class="btn btn-logout" onclick="logout()">Logout</button>
         </div>
         <div class="screen-content">
             <div class="workflow-content">
                 <div class="step-indicator">
-                    <div class="step active" data-step="1"><span class="step-num">1</span><span class="step-label">Upload CSV</span></div>
+                    <div class="step active" data-step="1"><span class="step-num">1</span><span
+                            class="step-label">Upload CSV</span></div>
                     <div class="step-line"></div>
-                    <div class="step" data-step="2"><span class="step-num">2</span><span class="step-label">Select Rooms</span></div>
+                    <div class="step" data-step="2"><span class="step-num">2</span><span class="step-label">Select
+                            Rooms</span></div>
                     <div class="step-line"></div>
-                    <div class="step" data-step="3"><span class="step-num">3</span><span class="step-label">Allocate</span></div>
+                    <div class="step" data-step="3"><span class="step-num">3</span><span
+                            class="step-label">Allocate</span></div>
                 </div>
 
                 <!-- Step 1: CSV Upload -->
                 <div class="workflow-step active" id="step-upload">
                     <div class="card workflow-card">
-                        <h2 id="upload-title">📁 Upload Student Details</h2>
+                        <h2 id="upload-title">Upload Student Details</h2>
                         <p class="card-desc">CSV format: EnrollmentID, StudentName, Department, ExamName</p>
                         <div class="upload-zone" id="upload-zone">
-                            <div class="upload-icon">📄</div>
+                            <div class="upload-icon"></div>
                             <p class="upload-main-text">Drag &amp; drop your CSV file here</p>
                             <p class="upload-or">— or —</p>
                             <label class="btn btn-outline upload-btn">
                                 Browse Files
-                                <input type="file" id="csv-file-input" accept=".csv,.txt" style="display:none" onchange="handleFileUpload(event)">
+                                <input type="file" id="csv-file-input" accept=".csv,.txt" style="display:none"
+                                    onchange="handleFileUpload(event)">
                             </label>
                         </div>
                         <div id="csv-preview" style="display:none;">
-                            <h3>📊 Upload Preview</h3>
+                            <h3>Upload Preview</h3>
                             <div class="table-responsive">
                                 <table class="data-table" id="csv-preview-table">
-                                    <thead><tr><th>Enrollment ID</th><th>Student Name</th><th>Department</th><th>Exam Name</th></tr></thead>
+                                    <thead>
+                                        <tr>
+                                            <th>Enrollment ID</th>
+                                            <th>Student Name</th>
+                                            <th>Department</th>
+                                            <th>Exam Name</th>
+                                        </tr>
+                                    </thead>
                                     <tbody id="csv-preview-body"></tbody>
                                 </table>
                             </div>
@@ -193,7 +211,7 @@
                 <!-- Step 2: Room Selection -->
                 <div class="workflow-step" id="step-rooms">
                     <div class="card workflow-card">
-                        <h2 id="room-selection-title">🚪 Select Rooms</h2>
+                        <h2 id="room-selection-title">Select Rooms</h2>
                         <div class="capacity-bar">
                             <div class="capacity-info">
                                 <span>Selected: <strong id="selected-capacity">0</strong> seats</span>
@@ -202,7 +220,7 @@
                             <div class="capacity-progress-wrap">
                                 <div class="capacity-progress" id="capacity-progress"></div>
                             </div>
-                            <div class="capacity-warning" id="capacity-warning" style="display:none;">⚠️ Not enough seats selected!</div>
+                            <div class="capacity-warning" id="capacity-warning" style="display:none;">Not enough seats selected!</div>
                         </div>
                         <div class="room-select-actions">
                             <button class="btn btn-sm btn-outline" onclick="selectAllRooms()">Select All</button>
@@ -211,7 +229,8 @@
                         <div id="room-grid" class="room-grid"></div>
                         <div class="step-actions">
                             <button class="btn btn-outline" onclick="goToStep(1)">← Back</button>
-                            <button class="btn btn-primary" id="btn-to-allocate" onclick="goToStep(3)" disabled>Continue to Allocation →</button>
+                            <button class="btn btn-primary" id="btn-to-allocate" onclick="goToStep(3)" disabled>Continue
+                                to Allocation →</button>
                         </div>
                     </div>
                 </div>
@@ -220,7 +239,7 @@
                 <div class="workflow-step" id="step-allocate">
                     <div class="card workflow-card">
                         <div id="allocate-ready">
-                            <h2>🎯 Ready to Allocate</h2>
+                            <h2>Ready to Allocate</h2>
                             <div class="allocate-summary">
                                 <div class="summary-item">
                                     <span class="summary-value" id="summary-students">0</span>
@@ -237,7 +256,8 @@
                             </div>
                             <div class="step-actions">
                                 <button class="btn btn-outline" onclick="goToStep(2)">← Back</button>
-                                <button class="btn btn-gold btn-lg allocate-btn" id="btn-allocate" onclick="runAllocation()">✨ Allocate with AI</button>
+                                <button class="btn btn-gold btn-lg allocate-btn" id="btn-allocate"
+                                    onclick="runAllocation()">Allocate with AI</button>
                             </div>
                         </div>
                         <div id="allocate-loading" style="display:none;">
@@ -249,20 +269,26 @@
                         </div>
                         <div id="allocate-results" style="display:none;">
                             <div class="success-banner">
-                                <span class="success-icon">✅</span>
+                                <span class="success-icon"></span>
                                 <h2>AI Allocation Complete!</h2>
                                 <p id="allocation-summary-text"></p>
                             </div>
                             <h3>Room Summary</h3>
                             <div class="table-responsive">
                                 <table class="data-table" id="room-summary-table">
-                                    <thead><tr><th>Room</th><th>Students Allocated</th><th>Capacity</th></tr></thead>
+                                    <thead>
+                                        <tr>
+                                            <th>Room</th>
+                                            <th>Students Allocated</th>
+                                            <th>Capacity</th>
+                                        </tr>
+                                    </thead>
                                     <tbody id="room-summary-body"></tbody>
                                 </table>
                             </div>
                             <div class="result-actions">
-                                <button class="btn btn-primary" onclick="downloadAllocationCSV()">📥 Download Allocation Report (CSV)</button>
-                                <button class="btn btn-gold" onclick="viewAllAllocations()">📋 View All Allocations</button>
+                                <button class="btn btn-primary" onclick="downloadAllocationCSV()">Download Allocation Report (CSV)</button>
+                                <button class="btn btn-gold" onclick="viewAllAllocations()">View All Allocations</button>
                             </div>
                         </div>
                     </div>
@@ -277,27 +303,33 @@
         <div class="screen-header">
             <button class="btn btn-back" onclick="showScreen('screen-faculty-dashboard')">← Back</button>
             <h1 class="header-title">EXAM SEATS</h1>
-            <button class="btn btn-logout" onclick="logout()">Logout ⏏</button>
+            <button class="btn btn-logout" onclick="logout()">Logout</button>
         </div>
         <div class="screen-content">
             <div class="workflow-content">
                 <div class="card workflow-card">
-                    <h2>📋 All Seat Allocations</h2>
+                    <h2>All Seat Allocations</h2>
                     <div class="search-bar">
-                        <input type="text" id="allocation-search" placeholder="🔍 Search by Enrollment ID, Name, or Room..." oninput="filterAllocations()">
+                        <input type="text" id="allocation-search"
+                            placeholder="Search by Enrollment ID, Name, or Room..." oninput="filterAllocations()">
                     </div>
                     <div class="table-responsive">
                         <table class="data-table" id="all-allocations-table">
                             <thead>
                                 <tr>
-                                    <th>Enrollment ID</th><th>Student Name</th><th>Department</th>
-                                    <th>Building</th><th>Floor</th><th>Room</th><th>Seat No</th>
+                                    <th>Enrollment ID</th>
+                                    <th>Student Name</th>
+                                    <th>Department</th>
+                                    <th>Building</th>
+                                    <th>Floor</th>
+                                    <th>Room</th>
+                                    <th>Seat No</th>
                                 </tr>
                             </thead>
                             <tbody id="all-allocations-body"></tbody>
                         </table>
                     </div>
-                    <button class="btn btn-primary" onclick="downloadAllocationCSV()" style="margin-top:20px;">📥 Download Full Report (CSV)</button>
+                    <button class="btn btn-primary" onclick="downloadAllocationCSV()" style="margin-top:20px;">Download Full Report (CSV)</button>
                 </div>
             </div>
         </div>
@@ -309,7 +341,7 @@
         <div class="screen-header">
             <div class="header-spacer"></div>
             <h1 class="header-title">EXAM SEATS</h1>
-            <button class="btn btn-logout" id="btn-logout-student" onclick="logout()">Logout ⏏</button>
+            <button class="btn btn-logout" id="btn-logout-student" onclick="logout()">Logout</button>
         </div>
         <div class="screen-content center-content">
             <div id="student-result-card" class="card result-card"></div>
@@ -319,4 +351,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <script src="app.js"></script>
 </body>
+
 </html>
