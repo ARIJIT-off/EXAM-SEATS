@@ -309,9 +309,51 @@
             <div class="workflow-content">
                 <div class="card workflow-card">
                     <h2>All Seat Allocations</h2>
-                    <div class="search-bar">
-                        <input type="text" id="allocation-search"
-                            placeholder="Search by Enrollment ID, Name, or Room..." oninput="filterAllocations()">
+                    <div class="allocation-controls">
+                        <div class="search-bar">
+                            <input type="text" id="allocation-search"
+                                placeholder="Search by Enrollment ID, Name, or Room..." oninput="filterAllocations()">
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-gold btn-sm" onclick="toggleManualAddForm()">+ Add Student Manually</button>
+                        </div>
+                    </div>
+
+                    <!-- Manual Add Form (initially hidden) -->
+                    <div id="manual-add-card" class="card manual-add-card" style="display:none; margin-bottom:24px; max-width: 100%;">
+                        <h3>Add Student Manually</h3>
+                        <form id="manual-add-form" onsubmit="handleManualAdd(event)">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                                <div class="form-group">
+                                    <label for="m-enrollment">Enrollment ID</label>
+                                    <input type="text" id="m-enrollment" placeholder="14-digit ID" maxlength="14" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="m-name">Student Name</label>
+                                    <input type="text" id="m-name" placeholder="Full Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="m-dept">Department</label>
+                                    <input type="text" id="m-dept" placeholder="Department" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="m-exam">Exam Name</label>
+                                    <input type="text" id="m-exam" placeholder="Exam Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="m-room">Room</label>
+                                    <select id="m-room" required onchange="updateManualSeats()"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="m-seat">Seat No</label>
+                                    <input type="number" id="m-seat" placeholder="Seat #" min="1" required>
+                                </div>
+                            </div>
+                            <div class="btn-group" style="margin-top:16px;">
+                                <button type="submit" class="btn btn-primary">Add Allocation</button>
+                                <button type="button" class="btn btn-outline" onclick="toggleManualAddForm()">Cancel</button>
+                            </div>
+                        </form>
                     </div>
                     <div class="table-responsive">
                         <table class="data-table" id="all-allocations-table">
@@ -324,12 +366,16 @@
                                     <th>Floor</th>
                                     <th>Room</th>
                                     <th>Seat No</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="all-allocations-body"></tbody>
                         </table>
                     </div>
-                    <button class="btn btn-primary" onclick="downloadAllocationCSV()" style="margin-top:20px;">Download Full Report (CSV)</button>
+                    <div class="result-actions" style="margin-top:24px; justify-content: space-between;">
+                        <button class="btn btn-primary" onclick="downloadAllocationCSV()">Download Report (CSV)</button>
+                        <button class="btn btn-success btn-lg" id="btn-finalize-allocation" onclick="finalizeAllocation()">Finalize Allocation ✓</button>
+                    </div>
                 </div>
             </div>
         </div>

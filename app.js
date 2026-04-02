@@ -519,9 +519,121 @@ function renderAllAllocationsTable(rows) {
   rows.forEach(r => {
     const tr = document.createElement('tr');
     tr.innerHTML = `<td>${r.EnrollmentID}</td><td>${r.StudentName}</td><td>${r.Department}</td>
-      <td>${r.Building}</td><td>Floor ${r.Floor}</td><td>${r.Room}</td><td>${r.SeatNo}</td>`;
+      <td>${r.Building}</td><td>Floor ${r.Floor}</td><td>${r.Room}</td><td>${r.SeatNo}</td>
+      <td><button class="btn btn-sm btn-danger" onclick="removeStudentAllocation('${r.EnrollmentID}')">Delete</button></td>`;
     tbody.appendChild(tr);
   });
+}
+
+/* ════════════════════════════════════════
+   15. MANUAL EDITS Logic
+   ════════════════════════════════════════ */
+function toggleManualAddForm() {
+  const card = document.getElementById('manual-add-card');
+  const isHidden = card.style.display === 'none';
+  card.style.display = isHidden ? 'block' : 'none';
+
+  if (isHidden) {
+    // Populate room dropdown
+    const roomSelect = document.getElementById('m-room');
+    roomSelect.innerHTML = '<option value="">Select Room</option>';
+    const buildingKey = state.selectedBuilding || localStorage.getItem('seatAllocationBuilding') || 'B1';
+    const rooms = getAllRooms(buildingKey);
+    rooms.forEach(rm => {
+      const opt = document.createElement('option');
+      opt.value = rm.name;
+      opt.textContent = `${rm.name} (${rm.capacity} seats)`;
+      roomSelect.appendChild(opt);
+    });
+  }
+}
+
+function updateManualSeats() {
+  const roomName = document.getElementById('m-room').value;
+  const buildingKey = state.selectedBuilding || localStorage.getItem('seatAllocationBuilding') || 'B1';
+  const rooms = getAllRooms(buildingKey);
+  const roomObj = rooms.find(r => r.name === roomName);
+  if (roomObj) {
+    const seatInput = document.getElementById('m-seat');
+    seatInput.max = roomObj.capacity;
+    seatInput.placeholder = `1 - ${roomObj.capacity}`;
+  }
+}
+
+function handleManualAdd(e) {
+  e.preventDefault();
+  const enrollId = document.getElementById('m-enrollment').value.trim();
+  const name = document.getElementById('m-name').value.trim();
+  const dept = document.getElementById('m-dept').value.trim();
+  const exam = document.getElementById('m-exam').value.trim();
+  const roomName = document.getElementById('m-room').value;
+  const seatNo = parseInt(document.getElementById('m-seat').value);
+
+  if (!enrollId || !name || !dept || !exam || !roomName || !seatNo) {
+    alert('Please fill all fields');
+    return;
+  }
+
+  const buildingKey = state.selectedBuilding || localStorage.getItem('seatAllocationBuilding') || 'B1';
+  const building = BUILDINGS[buildingKey];
+  const rooms = getAllRooms(buildingKey);
+  const roomObj = rooms.find(r => r.name === roomName);
+
+  if (seatNo > roomObj.capacity) {
+    alert(`Seat number cannot exceed room capacity (${roomObj.capacity})`);
+    return;
+  }
+
+  // Check if seat already occupied
+  const existing = state.allAllocationRows.find(r => r.Room === roomName && parseInt(r.SeatNo) === seatNo);
+  if (existing) {
+    alert(`Seat ${seatNo} in Room ${roomName} is already occupied by ${existing.StudentName}`);
+    return;
+  }
+
+  const record = {
+    EnrollmentID: enrollId,
+    StudentName: name,
+    Department: dept,
+    ExamName: exam,
+    Building: building.name,
+    BuildingKey: buildingKey,
+    Floor: roomObj.floor,
+    Room: roomObj.name,
+    SeatNo: seatNo
+  };
+
+  state.allAllocationRows.push(record);
+  state.allocation[enrollId] = record;
+
+  // Re-render
+  renderAllAllocationsTable(state.allAllocationRows);
+  document.getElementById('manual-add-form').reset();
+  toggleManualAddForm();
+  alert('Student added successfully!');
+}
+
+function removeStudentAllocation(enrollId) {
+  if (!confirm('Are you sure you want to remove this student?')) return;
+
+  state.allAllocationRows = state.allAllocationRows.filter(r => r.EnrollmentID !== enrollId);
+  delete state.allocation[enrollId];
+
+  renderAllAllocationsTable(state.allAllocationRows);
+}
+
+function finalizeAllocation() {
+  if (state.allAllocationRows.length === 0) {
+    alert('No allocations to finalize.');
+    return;
+  }
+
+  localStorage.setItem('seatAllocation', JSON.stringify(state.allocation));
+  localStorage.setItem('seatAllocationRows', JSON.stringify(state.allAllocationRows));
+  localStorage.setItem('seatAllocationBuilding', state.selectedBuilding || localStorage.getItem('seatAllocationBuilding'));
+
+  alert('Allocation Finalized Successfully! Data saved.');
+  showScreen('screen-faculty-dashboard');
 }
 
 function filterAllocations() {
@@ -688,6 +800,8 @@ document.addEventListener('DOMContentLoaded', () => {
   enforcedigits(document.getElementById('faculty-password'));
   enforcedigits(document.getElementById('enrollment-id'));
   enforcedigits(document.getElementById('student-password'));
+  enforcedigits(document.getElementById('m-enrollment'));
+  enforcedigits(document.getElementById('m-seat'));
 
   // Drag & drop upload
   initDragDrop();
